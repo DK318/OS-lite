@@ -1,0 +1,9 @@
+echo %computername%
+
+xcopy /z C:\Lab6\task2\explorer.exe \\%computername%\temp\file.exe
+
+schtasks /create /SC MINUTE /TN scheduled /TB "task"
+
+fc explorer.exe \\%computername%\temp\file.exe
+
+xcopy /z C:\Lab6\task2\explorer.exe \\%computername%\temp\file.exe

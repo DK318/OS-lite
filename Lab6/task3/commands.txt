@@ -1,0 +1,7 @@
+sc query | find /i "имя_службы" > services.txt
+
+net stop dnscache
+timeout /t 5 /nobreak
+sc query | find /i "имя_службы" > services1.txt
+fc services.txt services1.txt > diff.txt
+net start dnscache

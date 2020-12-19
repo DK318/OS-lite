@@ -1,0 +1,11 @@
+wmic os get caption, version > version.txt
+wmic computersystem get totalphysicalmemory > mem.txt
+wmic os get freephysicalmemory >> mem.txt
+wmic logicaldisk list brief > disks.txt
+
+xcopy * TEST
+cd TEST
+
+copy *.txt systeminfo.txt
+
+for /f "skip=1" %F in ('dir /b /o-d *.txt') do @del %F
