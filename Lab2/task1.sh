@@ -1,5 +1,6 @@
 #!/bin/bash
 
-let cnt=$(ps -u dk318 | wc -l)-2
-echo "Processes executed: $cnt"
-ps -u dk318 o pid,command
+proc=$(ps -u dk318 o pid,command | sed "s/^\s*//" | head -n -4 | tail -n +2)
+cnt=$(echo "$proc" | wc -l)
+echo "$cnt" > proc_count.log
+echo "$proc" | awk '{print $1 ":" $2}' >> proc_count.log

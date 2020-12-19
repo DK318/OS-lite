@@ -7,11 +7,11 @@ pids=$(ps ax -o pid | sed "s/\s*//" | head -n -4 | tail -n +2)
 for pid in $pids
 do
 	if [[ -d /proc/$pid/  ]]; then
-		bytes=$(sudo cat /proc/$pid/io | grep "read_bytes:" | awk '{print $2}')
+		bytes=$(cat /proc/$pid/io | grep "read_bytes:" | awk '{print $2}')
 		echo "$pid $bytes" >> tmp
 	fi
 done
-sleep 1m
+sleep 10s
 line=1
 for pid in $pids
 do

@@ -9,15 +9,14 @@ for dir in $pids
 do
 	if [[ "$dir" != "PID" ]]; then
 		if [[ -d /proc/$dir ]]; then
-			res+=$dir
-			res+=" "
+			res+="$dir "
 			res+=$(cat /proc/$dir/status | grep "PPid:" | awk '{print $2}')
 			res+=" "
 			art=$(cat /proc/$dir/sched | grep "se.sum_exec_runtime" | awk -F : '{print $2}' | sed "s/\s//g")
 			nr_switches=$(cat /proc/$dir/sched | grep "nr_switches" | awk -F : '{print $2}' | sed "s/\s//g")
 			art=$(echo "$art $nr_switches" | awk '{print $1 / $2}')
 			res+=$art
-			echo $res >> $file_name
+			echo "$res" >> $file_name
 			res=""
 		fi
 	fi
